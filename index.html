@@ -20,14 +20,24 @@ button,input,select,textarea{font:inherit} button{cursor:pointer}
 .step{display:flex;align-items:center;gap:10px;color:#98a0ad;font-size:13px;flex:1;position:relative}.step:not(:last-child):after{content:"";height:1px;background:#d7dbe3;position:absolute;left:95px;right:18px;top:14px}.num{width:29px;height:29px;border-radius:50%;display:grid;place-items:center;border:1px solid #cfd4de;background:#fff;z-index:1;font-weight:700}.step.active{color:var(--blue);font-weight:700}.step.active .num{background:var(--blue);color:#fff;border-color:var(--blue)}.step.done{color:#277256}.step.done .num{background:#e5f5ee;color:#197a55;border-color:#bde3d2}
 .view{display:none}.view.active{display:block}
 h1{font-size:29px;letter-spacing:-.7px;margin:0 0 8px}.lead{color:var(--muted);margin:0 0 25px;line-height:1.55}.grid2{display:grid;grid-template-columns:1.25fr .75fr;gap:22px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:23px;box-shadow:var(--shadow)}.card h2{font-size:16px;margin:0 0 15px}.label{font-size:12px;font-weight:750;color:#4e5969;text-transform:uppercase;letter-spacing:.05em;margin:18px 0 8px}
-.drop{border:2px dashed #bdc6d5;border-radius:12px;padding:38px 25px;text-align:center;background:#fbfcfe}.drop .icon{font-size:30px;margin-bottom:10px}.drop strong{display:block;margin-bottom:5px}.drop p{margin:0;color:var(--muted);font-size:13px}.file{margin-top:14px;background:#f3f5f8;border:1px solid #e1e5eb;border-radius:99px;padding:11px 13px;display:flex;justify-content:space-between;font-size:13px}
+.drop{border:2px dashed #bdc6d5;border-radius:12px;padding:38px 25px;text-align:center;background:#fbfcfe}.drop .icon{font-size:30px;margin-bottom:10px}.drop strong{display:block;margin-bottom:5px}.drop p{margin:0;color:var(--muted);font-size:13px}.file{margin-top:14px;background:#f3f5f8;border:1px solid #e1e5eb;border-radius:9px;padding:11px 13px;display:flex;justify-content:space-between;font-size:13px}
 select,input,textarea{width:100%;border:1px solid #cfd5df;border-radius:8px;padding:10px 11px;background:#fff;color:var(--ink);outline:none}select:focus,input:focus,textarea:focus{border-color:#8095e9;box-shadow:0 0 0 3px #e9edff}textarea{min-height:95px;resize:vertical}
-.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid #cfd5df;padding:8px 12px;border-radius:20px;background:#fff;font-size:13px;cursor:pointer}.chip.selected{background:var(--blue2);border-color:#8194e7;color:#2947ba;font-weight:650}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid #cfd5df;padding:8px 12px;border-radius:20px;background:#fff;font-size:13px}.chip.selected{background:var(--blue2);border-color:#8194e7;color:#2947ba;font-weight:650}
 .check{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:#4d5868;margin:11px 0}.check input{width:auto;margin-top:2px}
-.actions{display:flex;justify-content:space-between;align-items:center;margin-top:24px}.btn{border:0;border-radius:8px;padding:11px 16px;font-weight:700;font-size:13px}.primary{background:var(--blue);color:#fff}.secondary{background:#fff;color:#364152;border:1px solid #ccd3de}.ghost{background:transparent;color:#536074}.primary:hover{filter:brightness(.95)}.primary:disabled{opacity:0.5;cursor:not-allowed}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:24px}.btn{border:0;border-radius:8px;padding:11px 16px;font-weight:700;font-size:13px}.primary{background:var(--blue);color:#fff}.secondary{background:#fff;color:#364152;border:1px solid #ccd3de}.ghost{background:transparent;color:#536074}.primary:hover{filter:brightness(.95)}
 .summary{background:#f1f4ff;border:1px solid #d9e0ff;border-radius:11px;padding:15px;font-size:13px;line-height:1.5}.summary b{color:#2947ba}.notice{background:var(--yellow);border:1px solid #ead9a6;padding:13px;border-radius:10px;font-size:12px;line-height:1.45;color:#66531f}
-.options{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.option{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}.option.selected{border:2px solid var(--blue);transform:translateY(-2px)}.opthead{padding:17px;border-bottom:1px solid #e7e9ee}.tag{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:800;background:#f0f2f7;color:#5a6475;border-radius:5px;padding:4px 6px}.option h3{font-size:17px;margin:9px 0 6px}.option .desc{font-size:12px;color:var(--muted);line-height:1.45}.optbody{padding:17px;flex:1}.mini{font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:#697385;margin:14px 0 7px}.visual{height:88px;border-radius:9px;background:linear-gradient(135deg,#f1f4ff,#f7f8fa);border:1px solid #e1e5ed;display:flex;align-items:center;justify-content:center;font-size:35px;gap:14px}.frames{display:flex;flex-wrap:wrap;gap:5px}.frame{font-size:11px;border:1px solid #dfe3ea;border-radius:5px;padding:5px 7px;background:#fafbfc}.optfoot{padding:13px 17px;border-top:1px solid #e7e9ee;display:flex;gap:8px}.selectedmark{display:none;color:var(--blue);font-weight:800;font-size:12px;align-self:center}.option.selected .selectedmark{display:block}
+.options{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.option{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}.option.selected{border:2px solid var(--blue);transform:translateY(-2px)}.opthead{padding:17px;border-bottom:1px solid #e7e9ee}.tag{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:800;background:#f0f2f7;color:#5a6475;border-radius:5px;padding:4px 6px}.option h3{font-size:17px;margin:9px 0 6px}.option .desc{font-size:12px;color:var(--muted);line-height:1.45}.optbody{padding:17px;flex:1}.mini{font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:#697385;margin:14px 0 7px}.visual{height:88px;border-radius:9px;background:linear-gradient(135deg,#f1f4ff,#f7f8fa);border:1px solid #e1e5ed;display:flex;align-items:center;justify-content:center;font-size:35px;gap:14px}.frames{display:flex;flex-wrap:wrap;gap:5px}.frame{font-size:11px;border:1px solid #dfe3ea;border-radius:5px;padding:5px 7px;background:#fafbfc}.optfoot{padding:13px 17px;border-top:1px solid #e7e9ee;display:flex;gap:8px}.selectedmark{display:none;color:var(--blue);font-weight:800;font-size:12px}.option.selected .selectedmark{display:block}
 .review{display:grid;grid-template-columns:1fr 330px;gap:20px}.deliverable{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:28px 32px}.docbar{display:flex;justify-content:space-between;border-bottom:1px solid #e7e9ee;padding-bottom:15px;margin-bottom:22px}.docbar small{color:var(--muted)}.lesson-title{font-size:23px;margin:0 0 7px}.section{margin-top:23px}.section h3{font-size:14px;margin:0 0 9px}.bullet{font-size:13px;line-height:1.55;margin:7px 0}.prompt{background:#f6f7fa;border-left:3px solid #8b98b3;padding:10px 12px;font-size:13px;line-height:1.45;margin:8px 0}.langbox{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.lang{border:1px solid #e0e4ea;border-radius:8px;padding:9px;font-size:12px}.side h3{font-size:14px;margin:0 0 12px}.side .card{box-shadow:none;margin-bottom:14px}.success{background:#eaf7f1;border:1px solid #c5e8d8;color:#206a4e;padding:12px;border-radius:9px;font-size:12px;line-height:1.45}
+/* UDL alignment panel */
+.udl-panel{margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.udl-head{padding:18px 20px;border-bottom:1px solid #e5e8ee;display:flex;justify-content:space-between;gap:18px;align-items:center}
+.udl-head h2{margin:0;font-size:16px}.udl-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.udl-badge{font-size:11px;font-weight:800;border-radius:999px;padding:6px 9px;background:#edf8f2;color:#18724f;white-space:nowrap}
+.udl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e3e6eb}.udl-col{background:#fff;min-width:0}.udl-title{padding:14px 16px;color:#fff;font-weight:800;font-size:15px;line-height:1.15}.udl-title small{display:block;font-weight:600;font-size:11px;opacity:.9;margin-bottom:4px}.udl-eng{background:#0d8b4b}.udl-rep{background:#7250a0}.udl-act{background:#1685bd}
+.udl-row{padding:14px 16px;border-bottom:1px solid #eceef2;min-height:115px}.udl-row:last-child{border-bottom:0}.udl-row h4{margin:0 0 7px;font-size:13px}.udl-row ul{margin:0;padding-left:17px;color:#556071;font-size:11px;line-height:1.45}.udl-row li{margin:3px 0}
+.udl-focus{display:flex;gap:7px;flex-wrap:wrap;padding:15px 16px;background:#fafbfc;border-top:1px solid #e5e8ee}.udl-chip{border:1px solid #d2d7e0;background:#fff;border-radius:7px;padding:7px 9px;font-size:11px;color:#465163;cursor:pointer}.udl-chip.selected{background:#eef3ff;border-color:#7e94e9;color:#2948bb;font-weight:700}
+.udl-check{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.udl-check-card{border:1px solid #e0e4eb;border-radius:9px;padding:10px;background:#fafbfc;font-size:11px}.udl-check-card strong{display:block;font-size:12px;margin-bottom:4px}
+.udl-final{margin-top:22px;border:1px solid #dfe4eb;border-radius:10px;padding:14px;background:#fafbfc}.udl-final h4{margin:0 0 10px;font-size:13px}.udl-final-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.udl-final-grid div{border-radius:8px;padding:10px;background:#fff;border:1px solid #e2e6ec;font-size:11px;line-height:1.4}.udl-final-grid b{display:block;font-size:12px;margin-bottom:4px}
+@media(max-width:900px){.udl-grid,.udl-check,.udl-final-grid{grid-template-columns:1fr}}
 .toast{position:fixed;right:25px;bottom:25px;background:#17202a;color:#fff;border-radius:9px;padding:12px 15px;font-size:13px;display:none;box-shadow:var(--shadow)}.toast.show{display:block}
 @media(max-width:900px){.grid2,.review{grid-template-columns:1fr}.options{grid-template-columns:1fr}.step:not(:last-child):after{left:60px}.shell{padding:20px 16px}}
 </style>
@@ -107,6 +117,26 @@ Assessment: Students explain one relationship using evidence."></textarea>
 <div class="label">Teacher support level</div><select id="support"><option>Substitute-friendly — highly guided</option><option>Teacher-led</option><option>Light-touch</option></select>
 </div>
 </div>
+<div class="udl-panel">
+  <div class="udl-head"><div><h2>Design with UDL: plan for learner variability</h2><p>Choose supports to emphasize. Every generated option addresses all three UDL principles.</p></div><span class="udl-badge">UDL-aligned design check</span></div>
+  <div class="udl-grid">
+    <div class="udl-col"><div class="udl-title udl-eng"><small>Design Multiple Means of</small>Engagement</div>
+      <div class="udl-row"><h4>Welcoming Interests & Identities</h4><ul><li>Offer meaningful choice and autonomy</li><li>Connect to relevance, value, and authenticity</li><li>Make space for joy, play, identity, and belonging</li></ul></div>
+      <div class="udl-row"><h4>Sustaining Effort & Persistence</h4><ul><li>Clarify the purpose and goal</li><li>Optimize challenge and support</li><li>Foster collaboration and interdependence</li><li>Provide action-oriented feedback</li></ul></div>
+      <div class="udl-row"><h4>Emotional Capacity</h4><ul><li>Recognize learner expectations and motivations</li><li>Support self-awareness and reflection</li><li>Cultivate empathy and community</li></ul></div></div>
+    <div class="udl-col"><div class="udl-title udl-rep"><small>Design Multiple Means of</small>Representation</div>
+      <div class="udl-row"><h4>Perception</h4><ul><li>Customize the display of information</li><li>Provide multiple ways to perceive information</li><li>Represent diverse perspectives authentically</li></ul></div>
+      <div class="udl-row"><h4>Language & Symbols</h4><ul><li>Clarify vocabulary and language structures</li><li>Support decoding of text and symbols</li><li>Respect across languages and dialects</li><li>Illustrate through multiple media</li></ul></div>
+      <div class="udl-row"><h4>Building Knowledge</h4><ul><li>Connect prior knowledge to new learning</li><li>Highlight patterns, relationships, and big ideas</li><li>Cultivate multiple ways of knowing</li><li>Support transfer and generalization</li></ul></div></div>
+    <div class="udl-col"><div class="udl-title udl-act"><small>Design Multiple Means of</small>Action & Expression</div>
+      <div class="udl-row"><h4>Interaction</h4><ul><li>Vary methods for response, navigation, and movement</li><li>Provide accessible materials and tools</li></ul></div>
+      <div class="udl-row"><h4>Expression & Communication</h4><ul><li>Use multiple media for communication</li><li>Offer multiple tools for construction and creativity</li><li>Build fluency with graduated support</li></ul></div>
+      <div class="udl-row"><h4>Strategy Development</h4><ul><li>Set meaningful goals</li><li>Anticipate and plan for challenges</li><li>Organize information and resources</li><li>Support monitoring of progress</li></ul></div></div>
+  </div>
+  <div class="udl-focus"><span style="font-size:11px;font-weight:800;color:#596273;padding:7px 3px">Emphasize:</span>
+    <button class="udl-chip selected" onclick="toggleUdlChip(this)">Choice & autonomy</button><button class="udl-chip selected" onclick="toggleUdlChip(this)">Collaboration</button><button class="udl-chip selected" onclick="toggleUdlChip(this)">Multiple representations</button><button class="udl-chip selected" onclick="toggleUdlChip(this)">Language & symbols</button><button class="udl-chip selected" onclick="toggleUdlChip(this)">Multiple ways to express</button><button class="udl-chip" onclick="toggleUdlChip(this)">Self-reflection</button><button class="udl-chip" onclick="toggleUdlChip(this)">Strategy development</button>
+  </div>
+</div>
 <div class="actions"><button class="btn secondary" onclick="go(1)">← Back</button><button class="btn primary" onclick="generateOptions()">Generate 3 options →</button></div>
 </section>
 
@@ -150,6 +180,7 @@ Assessment: Students explain one relationship using evidence."></textarea>
 <div class="section"><h3>Visual routine</h3><div class="visual" id="finalVisual"></div></div>
 <div class="section"><h3>Language supports</h3><div class="langbox" id="finalLanguages"></div></div>
 <div class="section"><h3>Teacher / substitute guide</h3><div id="finalGuide"></div></div>
+<div class="udl-final"><h4>UDL alignment</h4><div class="udl-final-grid"><div><b>Engagement</b><span id="finalUdlEng"></span></div><div><b>Representation</b><span id="finalUdlRep"></span></div><div><b>Action & Expression</b><span id="finalUdlAct"></span></div></div></div>
 <div class="section"><h3>Materials</h3><p class="bullet" id="finalMaterials"></p></div>
 </div>
 <div class="side">
@@ -165,7 +196,11 @@ Assessment: Students explain one relationship using evidence."></textarea>
 let current=1;
 let lesson={raw:"",objective:"",activity:"",materials:"",assessment:""};
 let selectedOption=1;
-let generatedOptions=[];
+let generatedOptions=[
+  {title:"Visual Sort & Explain",tag:"Option 1 · Representation + collaboration",desc:"Students sort or sequence lesson concepts with picture/word cards, then explain one connection to a partner.",visual:"🖼️ → 🧩 → 💬 → 🔄",frames:["“I notice…”","“___ connects to ___.”","“Porque…”"],prompt:"“Point to the part of the lesson that supports your idea. Tell your partner what you notice.”",udl:{eng:"Welcoming interests & identities; Sustaining effort & persistence",rep:"Perception; Language & symbols; Building knowledge",act:"Interaction; Expression & communication; Strategy development"}},
+  {title:"Partner Think–Move–Talk",tag:"Option 2 · Engagement + movement",desc:"Students move, point, compare, and rehearse an explanation with a partner before sharing a group response.",visual:"👀 → 🚶 → 👥 → 🗣️",frames:["“I think ___ because…”","“Can you show me?”","“Estoy de acuerdo…”"],prompt:"“Give everyone quiet think time, then ask partners to point to evidence before they talk.”",udl:{eng:"Choice & autonomy; Collaboration; Belonging",rep:"Language & symbols; Building knowledge",act:"Interaction; Expression & communication; Strategy development"}},
+  {title:"Draw–Pair–Explain",tag:"Option 3 · Expression + low language load",desc:"Students create a simple visual representation of the lesson concept, rehearse with a partner, and explain using sentence frames.",visual:"✏️ + 🖼️ → 👥 → 💬",frames:["“This shows…”","“It needs…”","“Porque…”"],prompt:"“Students may draw, gesture, point, or use their home language before trying the sentence frame.”",udl:{eng:"Emotional capacity; Sustaining effort & persistence",rep:"Perception; Language & symbols; Building knowledge",act:"Interaction; Expression & communication; Strategy development"}}
+ ];
 
 function esc(s){return (s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
 function go(n){
@@ -176,6 +211,7 @@ function go(n){
  window.scrollTo({top:0,behavior:'smooth'});
 }
 function toggleChip(el){el.classList.toggle('selected');}
+function toggleUdlChip(el){el.classList.toggle('selected');}
 function toast(t){let x=document.getElementById('toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),2200);}
 function selectedLanguages(){return [...document.querySelectorAll('#languageChips .chip.selected')].map(x=>x.textContent.trim());}
 
@@ -266,17 +302,13 @@ function generateOptions(){
  const duration=document.getElementById('duration').value;
  const support=document.getElementById('support').value;
  const langs=selectedLanguages();
- generatedOptions=[
-  {title:"Visual Sort & Explain",tag:"Option 1 · Visual-first",desc:"Students sort or sequence lesson concepts with picture/word cards, then explain one connection to a partner.",visual:"🖼️ → 🧩 → 💬 → 🔄",frames:["“I notice…”","“___ connects to ___.”","“Porque…”"],prompt:"“Point to the part of the lesson that supports your idea. Tell your partner what you notice.”"},
-  {title:"Partner Think–Move–Talk",tag:"Option 2 · Talk + movement",desc:"Students move, point, compare, and rehearse an explanation with a partner before sharing a group response.",visual:"👀  →  🚶  →  👥  →  🗣️",frames:["“I think ___ because…”","“Can you show me?”","“Estoy de acuerdo…”"],prompt:"“Give everyone quiet think time, then ask partners to point to evidence before they talk.”"},
-  {title:"Draw–Pair–Explain",tag:"Option 3 · Low language load",desc:"Students create a simple visual representation of the lesson concept, rehearse with a partner, and explain using sentence frames.",visual:"✏️ + 🖼️ → 👥 → 💬",frames:["“This shows…”","“It needs…”","“Porque…”"],prompt:"“Students may draw, gesture, point, or use their home language before trying the sentence frame.”"}
- ];
  document.getElementById('brief').innerHTML="<b>Based on your lesson:</b> "+esc(lesson.objective)+"<br><b>Design:</b> "+esc(grade)+" · "+esc(langs.join(" + "))+" · "+esc(duration)+" · "+esc(support);
  document.getElementById('options').innerHTML=generatedOptions.map((o,i)=>`
  <div class="option ${i===0?'selected':''}" id="o${i+1}">
   <div class="opthead"><span class="tag">${o.tag}</span><h3>${o.title}</h3><div class="desc">${o.desc}</div></div>
   <div class="optbody"><div class="mini">Visual sequence</div><div class="visual">${o.visual}</div>
   <div class="mini">Sentence frames</div><div class="frames">${o.frames.map(f=>`<span class="frame">${f}</span>`).join("")}</div>
+  <div class="mini">UDL alignment</div><div class="udl-check"><div class="udl-check-card"><strong>Engagement</strong>${o.udl.eng}</div><div class="udl-check-card"><strong>Representation</strong>${o.udl.rep}</div><div class="udl-check-card"><strong>Action & Expression</strong>${o.udl.act}</div></div>
   <div class="mini">Teacher prompt</div><div class="prompt">${o.prompt}</div></div>
   <div class="optfoot"><span class="selectedmark">✓ Selected</span><button class="btn secondary" style="margin-left:auto" onclick="selectOpt(${i+1})">Select</button></div>
  </div>`).join("");
@@ -328,6 +360,9 @@ function generateFinal(){
  `<div class="prompt"><b>Look for:</b> Students use evidence from the original lesson and every student contributes an idea or representation.</div>`,
  `<div class="prompt"><b>Teacher feedback incorporated:</b> ${esc(feedback)}</div>`
  ].join("");
+ document.getElementById('finalUdlEng').textContent=o.udl.eng;
+ document.getElementById('finalUdlRep').textContent=o.udl.rep;
+ document.getElementById('finalUdlAct').textContent=o.udl.act;
  document.getElementById('finalMaterials').textContent=lesson.materials;
  go(5);toast("Final lesson generated from your lesson plan");
 }
@@ -338,5 +373,4 @@ function downloadDoc(){
 }
 function copyLink(){navigator.clipboard?.writeText(location.href);toast('Prototype link copied');}
 </script>
-</body>
-</html>
+</body></html>
