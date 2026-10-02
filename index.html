@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LessonBridge — Multilingual Lesson Adapter</title>
+<style>
+:root{
+  --ink:#17202a; --muted:#667085; --line:#d9dee7; --bg:#f6f7f9;
+  --card:#fff; --blue:#3157d5; --blue2:#eef2ff; --green:#197a55;
+  --yellow:#fff7df; --purple:#6c45b8; --shadow:0 8px 30px rgba(20,30,55,.08);
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+button,input,select,textarea{font:inherit} button{cursor:pointer}
+.top{height:68px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;z-index:10}
+.brand{font-weight:800;font-size:20px;letter-spacing:-.3px}.brand span{color:var(--blue)}
+.beta{font-size:11px;background:#f0f2f6;padding:4px 7px;border-radius:6px;margin-left:7px;color:#596273}
+.user{display:flex;align-items:center;gap:10px;font-size:13px;color:#505b6c}.avatar{width:32px;height:32px;border-radius:50%;background:#e9ecff;display:grid;place-items:center;color:#334fc0;font-weight:700}
+.shell{max-width:1240px;margin:0 auto;padding:28px 28px 60px}.stepper{display:flex;gap:0;margin:4px 0 30px}
+.step{display:flex;align-items:center;gap:10px;color:#98a0ad;font-size:13px;flex:1;position:relative}.step:not(:last-child):after{content:"";height:1px;background:#d7dbe3;position:absolute;left:95px;right:18px;top:14px}.num{width:29px;height:29px;border-radius:50%;display:grid;place-items:center;border:1px solid #cfd4de;background:#fff;z-index:1;font-weight:700}.step.active{color:var(--blue);font-weight:700}.step.active .num{background:var(--blue);color:#fff;border-color:var(--blue)}.step.done{color:#277256}.step.done .num{background:#e5f5ee;color:#197a55;border-color:#bde3d2}
+.view{display:none}.view.active{display:block}
+h1{font-size:29px;letter-spacing:-.7px;margin:0 0 8px}.lead{color:var(--muted);margin:0 0 25px;line-height:1.55}.grid2{display:grid;grid-template-columns:1.25fr .75fr;gap:22px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:23px;box-shadow:var(--shadow)}.card h2{font-size:16px;margin:0 0 15px}.label{font-size:12px;font-weight:750;color:#4e5969;text-transform:uppercase;letter-spacing:.05em;margin:18px 0 8px}
+.drop{border:2px dashed #bdc6d5;border-radius:12px;padding:38px 25px;text-align:center;background:#fbfcfe}.drop .icon{font-size:30px;margin-bottom:10px}.drop strong{display:block;margin-bottom:5px}.drop p{margin:0;color:var(--muted);font-size:13px}.file{margin-top:14px;background:#f3f5f8;border:1px solid #e1e5eb;border-radius:99px;padding:11px 13px;display:flex;justify-content:space-between;font-size:13px}
+select,input,textarea{width:100%;border:1px solid #cfd5df;border-radius:8px;padding:10px 11px;background:#fff;color:var(--ink);outline:none}select:focus,input:focus,textarea:focus{border-color:#8095e9;box-shadow:0 0 0 3px #e9edff}textarea{min-height:95px;resize:vertical}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid #cfd5df;padding:8px 12px;border-radius:20px;background:#fff;font-size:13px;cursor:pointer}.chip.selected{background:var(--blue2);border-color:#8194e7;color:#2947ba;font-weight:650}
+.check{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:#4d5868;margin:11px 0}.check input{width:auto;margin-top:2px}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:24px}.btn{border:0;border-radius:8px;padding:11px 16px;font-weight:700;font-size:13px}.primary{background:var(--blue);color:#fff}.secondary{background:#fff;color:#364152;border:1px solid #ccd3de}.ghost{background:transparent;color:#536074}.primary:hover{filter:brightness(.95)}.primary:disabled{opacity:0.5;cursor:not-allowed}
+.summary{background:#f1f4ff;border:1px solid #d9e0ff;border-radius:11px;padding:15px;font-size:13px;line-height:1.5}.summary b{color:#2947ba}.notice{background:var(--yellow);border:1px solid #ead9a6;padding:13px;border-radius:10px;font-size:12px;line-height:1.45;color:#66531f}
+.options{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.option{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}.option.selected{border:2px solid var(--blue);transform:translateY(-2px)}.opthead{padding:17px;border-bottom:1px solid #e7e9ee}.tag{display:inline-block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:800;background:#f0f2f7;color:#5a6475;border-radius:5px;padding:4px 6px}.option h3{font-size:17px;margin:9px 0 6px}.option .desc{font-size:12px;color:var(--muted);line-height:1.45}.optbody{padding:17px;flex:1}.mini{font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:800;color:#697385;margin:14px 0 7px}.visual{height:88px;border-radius:9px;background:linear-gradient(135deg,#f1f4ff,#f7f8fa);border:1px solid #e1e5ed;display:flex;align-items:center;justify-content:center;font-size:35px;gap:14px}.frames{display:flex;flex-wrap:wrap;gap:5px}.frame{font-size:11px;border:1px solid #dfe3ea;border-radius:5px;padding:5px 7px;background:#fafbfc}.optfoot{padding:13px 17px;border-top:1px solid #e7e9ee;display:flex;gap:8px}.selectedmark{display:none;color:var(--blue);font-weight:800;font-size:12px;align-self:center}.option.selected .selectedmark{display:block}
+.review{display:grid;grid-template-columns:1fr 330px;gap:20px}.deliverable{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:28px 32px}.docbar{display:flex;justify-content:space-between;border-bottom:1px solid #e7e9ee;padding-bottom:15px;margin-bottom:22px}.docbar small{color:var(--muted)}.lesson-title{font-size:23px;margin:0 0 7px}.section{margin-top:23px}.section h3{font-size:14px;margin:0 0 9px}.bullet{font-size:13px;line-height:1.55;margin:7px 0}.prompt{background:#f6f7fa;border-left:3px solid #8b98b3;padding:10px 12px;font-size:13px;line-height:1.45;margin:8px 0}.langbox{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.lang{border:1px solid #e0e4ea;border-radius:8px;padding:9px;font-size:12px}.side h3{font-size:14px;margin:0 0 12px}.side .card{box-shadow:none;margin-bottom:14px}.success{background:#eaf7f1;border:1px solid #c5e8d8;color:#206a4e;padding:12px;border-radius:9px;font-size:12px;line-height:1.45}
+.toast{position:fixed;right:25px;bottom:25px;background:#17202a;color:#fff;border-radius:9px;padding:12px 15px;font-size:13px;display:none;box-shadow:var(--shadow)}.toast.show{display:block}
+@media(max-width:900px){.grid2,.review{grid-template-columns:1fr}.options{grid-template-columns:1fr}.step:not(:last-child):after{left:60px}.shell{padding:20px 16px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="brand">Lesson<span>Bridge</span><span class="beta">PROTOTYPE</span></div><div class="user"><span>Teacher workspace</span><span class="avatar">T</span></div></header>
+<main class="shell">
+<div class="stepper">
+  <div class="step active" data-step="1"><span class="num">1</span><span>Lesson</span></div>
+  <div class="step" data-step="2"><span class="num">2</span><span>Design</span></div>
+  <div class="step" data-step="3"><span class="num">3</span><span>Options</span></div>
+  <div class="step" data-step="4"><span class="num">4</span><span>Refine</span></div>
+  <div class="step" data-step="5"><span class="num">5</span><span>Deliver</span></div>
+</div>
+
+<section class="view active" id="v1">
+<h1>Bring your own lesson</h1>
+<p class="lead">Upload a lesson plan or paste one below. LessonBridge will extract the key pieces so you can review them before designing the multilingual activity.</p>
+<div class="grid2">
+<div class="card">
+<h2>1. Add your core lesson</h2>
+<div class="drop" id="dropZone">
+  <div class="icon">↥</div>
+  <strong>Drag & drop your lesson plan here</strong>
+  <p>TXT, MD, HTML, DOCX, or paste lesson text</p>
+  <input id="fileInput" type="file" accept=".txt,.md,.html,.htm,.docx" style="display:none">
+  <button class="btn secondary" style="margin-top:14px" onclick="document.getElementById('fileInput').click()">Choose a file</button>
+</div>
+<div class="file" id="fileStatus" style="display:none"><span id="fileName">Lesson</span><span style="color:#197a55;font-weight:700">✓ Ready</span></div>
+<div class="label">Or paste your lesson plan</div>
+<textarea id="lessonInput" style="min-height:190px" placeholder="Paste your lesson plan here...
+
+Example:
+Grade 3 Science
+Objective: Students will explain how living things depend on one another in an ecosystem.
+Materials: food web cards, chart paper
+Activity: Students work in groups to arrange organisms and discuss their relationships.
+Assessment: Students explain one relationship using evidence."></textarea>
+</div>
+<div class="card">
+<h2>2. Review the lesson we found</h2>
+<div id="extractionEmpty" class="notice">Add a lesson on the left. We'll identify the objective, activity, materials, assessment, and other useful context.</div>
+<div id="extraction" style="display:none">
+  <div class="label">Learning objective</div>
+  <textarea id="exObjective"></textarea>
+  <div class="label">Existing activity</div>
+  <textarea id="exActivity"></textarea>
+  <div class="label">Materials</div>
+  <textarea id="exMaterials"></textarea>
+  <div class="label">Assessment / evidence</div>
+  <textarea id="exAssessment"></textarea>
+</div>
+</div>
+</div>
+<div class="actions"><span id="lessonHint" style="font-size:12px;color:#667085">Your original lesson stays editable throughout the workflow.</span><button class="btn primary" id="continueLesson" onclick="prepareDesign()" disabled>Continue to design →</button></div>
+</section>
+
+<section class="view" id="v2">
+<h1>Tell us about your class</h1>
+<p class="lead">A few choices help LessonBridge adapt <b id="designLessonName">your lesson</b> into a realistic collaborative experience.</p>
+<div class="grid2">
+<div class="card">
+<h2>Class context</h2>
+<div class="label">Grade level</div><select id="grade"><option>Kindergarten</option><option>Grade 1</option><option>Grade 2</option><option selected>Grade 3</option><option>Grade 4</option><option>Grade 5</option></select>
+<div class="label">Student languages</div>
+<div class="chips" id="languageChips"><button class="chip selected" onclick="toggleChip(this)">English</button><button class="chip selected" onclick="toggleChip(this)">Spanish</button><button class="chip" onclick="toggleChip(this)">Arabic</button><button class="chip" onclick="toggleChip(this)">Vietnamese</button><button class="chip" onclick="toggleChip(this)">Chinese</button></div>
+<div class="label">What should students accomplish together?</div>
+<textarea id="outcome"></textarea>
+</div>
+<div class="card">
+<h2>Design priorities</h2>
+<div class="label">Prioritize</div>
+<div class="check"><input type="checkbox" checked><span><b>Multiple means of engagement</b><br><span style="color:#7a8493">Ways for students to participate and collaborate</span></span></div>
+<div class="check"><input type="checkbox" checked><span><b>Multiple means of expression</b><br><span style="color:#7a8493">Ways to show understanding beyond writing</span></span></div>
+<div class="check"><input type="checkbox" checked><span><b>Multiple means of representation</b><br><span style="color:#7a8493">Visuals, language, modeling, and examples</span></span></div>
+<div class="label">Activity length</div><select id="duration"><option>15–20 minutes</option><option>20–30 minutes</option><option>30–45 minutes</option></select>
+<div class="label">Teacher support level</div><select id="support"><option>Substitute-friendly — highly guided</option><option>Teacher-led</option><option>Light-touch</option></select>
+</div>
+</div>
+<div class="actions"><button class="btn secondary" onclick="go(1)">← Back</button><button class="btn primary" onclick="generateOptions()">Generate 3 options →</button></div>
+</section>
+
+<section class="view" id="v3">
+<h1>Choose an activity approach</h1><p class="lead">These options are based on your lesson and learning outcome. Select one to refine.</p>
+<div class="summary" id="brief"></div>
+<div class="options" id="options" style="margin-top:18px"></div>
+<div class="actions"><button class="btn secondary" onclick="go(2)">← Adjust inputs</button><button class="btn primary" onclick="go(4)">Continue with selected →</button></div>
+</section>
+
+<section class="view" id="v4">
+<h1>Make it fit your classroom</h1><p class="lead">Tell LessonBridge what to change. Your feedback can be specific or open-ended.</p>
+<div class="review">
+<div class="card">
+<h2>Selected: <span id="selectedTitle">Activity</span></h2>
+<div id="selectedPreview" class="summary" style="margin-bottom:16px"></div>
+<div class="label">Teacher feedback</div>
+<textarea id="feedback">Make the directions easier for a substitute to follow. I want students to do most of the talking, with clear support for students who are still developing English.</textarea>
+<div class="label">Quick adjustments</div>
+<div class="chips"><button class="chip selected" onclick="toggleChip(this)">More visuals</button><button class="chip selected" onclick="toggleChip(this)">Less teacher talk</button><button class="chip" onclick="toggleChip(this)">More movement</button><button class="chip" onclick="toggleChip(this)">Simpler language</button><button class="chip" onclick="toggleChip(this)">More challenge</button></div>
+<div class="label">Include a substitute teacher script?</div>
+<select id="script"><option>Yes — step-by-step</option><option>Yes — brief prompts only</option><option>No</option></select>
+<div class="actions"><button class="btn secondary" onclick="go(3)">← Back to options</button><button class="btn primary" onclick="generateFinal()">Generate final lesson →</button></div>
+</div>
+<div>
+<div class="card side"><h3>What will be included</h3><div class="check"><input type="checkbox" checked><span>Activity directions</span></div><div class="check"><input type="checkbox" checked><span>Visual student sequence</span></div><div class="check"><input type="checkbox" checked><span>Selected language directions</span></div><div class="check"><input type="checkbox" checked><span>Sentence frames</span></div><div class="check"><input type="checkbox" checked><span>Teacher/substitute guide</span></div><div class="check"><input type="checkbox" checked><span>Teacher prompts + look-fors</span></div></div>
+<div class="success">✓ The learning outcome stays connected to your original lesson.</div>
+</div>
+</div>
+</section>
+
+<section class="view" id="v5">
+<h1>Your adapted lesson is ready</h1><p class="lead">Review, edit, and export a teacher-ready version based on your lesson.</p>
+<div class="review">
+<div class="deliverable" id="deliverable">
+<div class="docbar"><div><small id="docMeta">ADAPTED ACTIVITY</small></div><div><small id="docLangs">English + Español</small></div></div>
+<h2 class="lesson-title" id="finalTitle">Adapted activity</h2>
+<p style="font-size:13px;color:#667085" id="finalMeta"></p>
+<div class="section"><h3>Original learning outcome</h3><p class="bullet" id="finalObjective"></p></div>
+<div class="section"><h3>Student directions</h3><div id="finalDirections"></div></div>
+<div class="section"><h3>Visual routine</h3><div class="visual" id="finalVisual"></div></div>
+<div class="section"><h3>Language supports</h3><div class="langbox" id="finalLanguages"></div></div>
+<div class="section"><h3>Teacher / substitute guide</h3><div id="finalGuide"></div></div>
+<div class="section"><h3>Materials</h3><p class="bullet" id="finalMaterials"></p></div>
+</div>
+<div class="side">
+<div class="card"><h3>Export / share</h3><button class="btn primary" style="width:100%;margin-bottom:8px" onclick="downloadDoc()">Download editable DOCX</button><button class="btn secondary" style="width:100%;margin-bottom:8px" onclick="copyLink()">Copy share link</button><button class="btn secondary" style="width:100%" onclick="window.print()">Print / PDF</button></div>
+<div class="card"><h3>Before you use it</h3><div class="check"><input type="checkbox" checked><span>Review language translations</span></div><div class="check"><input type="checkbox" checked><span>Confirm visuals are appropriate</span></div><div class="check"><input type="checkbox" checked><span>Adjust materials for your classroom</span></div></div>
+<div class="success">This prototype keeps the teacher in the loop: AI proposes; the teacher selects, edits, and approves.</div>
+</div>
+</div>
+</section>
+</main>
+<div class="toast" id="toast">Copied!</div>
+<script>
+let current=1;
+let lesson={raw:"",objective:"",activity:"",materials:"",assessment:""};
+let selectedOption=1;
+let generatedOptions=[];
+
+function esc(s){return (s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
+function go(n){
+ current=n;
+ document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+ document.getElementById('v'+n).classList.add('active');
+ document.querySelectorAll('.step').forEach(s=>{let x=+s.dataset.step;s.classList.remove('active','done');if(x===n)s.classList.add('active');if(x<n)s.classList.add('done');});
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleChip(el){el.classList.toggle('selected');}
+function toast(t){let x=document.getElementById('toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),2200);}
+function selectedLanguages(){return [...document.querySelectorAll('#languageChips .chip.selected')].map(x=>x.textContent.trim());}
+
+const lessonInput=document.getElementById('lessonInput');
+lessonInput.addEventListener('input',()=>{if(lessonInput.value.trim()) processLesson(lessonInput.value,"Pasted lesson plan");});
+
+const fileInput=document.getElementById('fileInput');
+fileInput.addEventListener('change',e=>{if(e.target.files[0]) readFile(e.target.files[0]);});
+const drop=document.getElementById('dropZone');
+drop.addEventListener('dragover',e=>{e.preventDefault();drop.style.borderColor="#8095e9";});
+drop.addEventListener('dragleave',()=>drop.style.borderColor="#bdc6d5");
+drop.addEventListener('drop',e=>{e.preventDefault();drop.style.borderColor="#bdc6d5";if(e.dataTransfer.files[0]) readFile(e.dataTransfer.files[0]);});
+
+async function readFile(file){
+ document.getElementById('fileName').textContent="📄 "+file.name;
+ document.getElementById('fileStatus').style.display="flex";
+ if(file.name.toLowerCase().endsWith(".docx")){
+   toast("DOCX detected — loading document text…");
+   try{
+     if(!window.mammoth){
+       await loadScript("https://unpkg.com/mammoth@1.8.0/mammoth.browser.min.js");
+     }
+     const buf=await file.arrayBuffer();
+     const result=await window.mammoth.extractRawText({arrayBuffer:buf});
+     lessonInput.value=result.value;
+     processLesson(result.value,file.name);
+   }catch(e){toast("DOCX reading needs an internet connection; paste the text instead.");}
+ }else{
+   const text=await file.text();
+   lessonInput.value=text.replace(/<[^>]+>/g," ");
+   processLesson(lessonInput.value,file.name);
+ }
+}
+function loadScript(src){return new Promise((resolve,reject)=>{let s=document.createElement("script");s.src=src;s.onload=resolve;s.onerror=reject;document.head.appendChild(s);});}
+
+function processLesson(text,name){
+ lesson.raw=text;
+ const clean=text.replace(/\r/g,"").trim();
+ lesson.objective=extract(clean,["objective","learning objective","students will","students can","goal"]);
+ lesson.activity=extract(clean,["activity","procedure","lesson activity","students work","students will"]);
+ lesson.materials=extract(clean,["materials","resources","supplies"]);
+ lesson.assessment=extract(clean,["assessment","evidence","check for understanding","exit ticket"]);
+ if(!lesson.objective) lesson.objective=firstMeaningfulSentence(clean)||"Students will demonstrate understanding of the lesson objective.";
+ if(!lesson.activity) lesson.activity=firstParagraph(clean)||"Students complete the existing lesson activity.";
+ if(!lesson.materials) lesson.materials="Use the materials already listed in the lesson.";
+ if(!lesson.assessment) lesson.assessment="Use the original assessment or ask students to explain their thinking.";
+ document.getElementById('exObjective').value=lesson.objective;
+ document.getElementById('exActivity').value=lesson.activity;
+ document.getElementById('exMaterials').value=lesson.materials;
+ document.getElementById('exAssessment').value=lesson.assessment;
+ document.getElementById('extractionEmpty').style.display="none";
+ document.getElementById('extraction').style.display="block";
+ document.getElementById('continueLesson').disabled=false;
+ document.getElementById('lessonHint').textContent="✓ Lesson loaded. Review the extracted fields before continuing.";
+}
+function extract(text,labels){
+ const lines=text.split(/\n+/).map(x=>x.trim()).filter(Boolean);
+ for(let i=0;i<lines.length;i++){
+   const lower=lines[i].toLowerCase();
+   const hit=labels.find(l=>lower.startsWith(l.toLowerCase()+":")||lower===l.toLowerCase());
+   if(hit){
+     let value=lines[i].split(":").slice(1).join(":").trim();
+     if(value) return value;
+     if(lines[i+1]) return lines[i+1];
+   }
+ }
+ for(const label of labels){
+   const idx=text.toLowerCase().indexOf(label.toLowerCase());
+   if(idx>=0){let chunk=text.slice(idx+label.length,idx+label.length+280).replace(/^[:\s-]+/,"").split(/\n\n/)[0].trim();if(chunk)return chunk;}
+ }
+ return "";
+}
+function firstMeaningfulSentence(t){return (t.match(/[^.!?]+[.!?]/)||[])[0]?.trim()||""}
+function firstParagraph(t){return t.split(/\n\s*\n/).find(p=>p.trim().length>30)?.trim()||t.slice(0,280);}
+
+function prepareDesign(){
+ lesson.objective=document.getElementById('exObjective').value.trim();
+ lesson.activity=document.getElementById('exActivity').value.trim();
+ lesson.materials=document.getElementById('exMaterials').value.trim();
+ lesson.assessment=document.getElementById('exAssessment').value.trim();
+ document.getElementById('outcome').value=lesson.objective;
+ document.getElementById('designLessonName').textContent=lesson.activity.slice(0,70)+(lesson.activity.length>70?"…":"");
+ go(2);
+}
+
+function generateOptions(){
+ const grade=document.getElementById('grade').value;
+ const duration=document.getElementById('duration').value;
+ const support=document.getElementById('support').value;
+ const langs=selectedLanguages();
+ generatedOptions=[
+  {title:"Visual Sort & Explain",tag:"Option 1 · Visual-first",desc:"Students sort or sequence lesson concepts with picture/word cards, then explain one connection to a partner.",visual:"🖼️ → 🧩 → 💬 → 🔄",frames:["“I notice…”","“___ connects to ___.”","“Porque…”"],prompt:"“Point to the part of the lesson that supports your idea. Tell your partner what you notice.”"},
+  {title:"Partner Think–Move–Talk",tag:"Option 2 · Talk + movement",desc:"Students move, point, compare, and rehearse an explanation with a partner before sharing a group response.",visual:"👀  →  🚶  →  👥  →  🗣️",frames:["“I think ___ because…”","“Can you show me?”","“Estoy de acuerdo…”"],prompt:"“Give everyone quiet think time, then ask partners to point to evidence before they talk.”"},
+  {title:"Draw–Pair–Explain",tag:"Option 3 · Low language load",desc:"Students create a simple visual representation of the lesson concept, rehearse with a partner, and explain using sentence frames.",visual:"✏️ + 🖼️ → 👥 → 💬",frames:["“This shows…”","“It needs…”","“Porque…”"],prompt:"“Students may draw, gesture, point, or use their home language before trying the sentence frame.”"}
+ ];
+ document.getElementById('brief').innerHTML="<b>Based on your lesson:</b> "+esc(lesson.objective)+"<br><b>Design:</b> "+esc(grade)+" · "+esc(langs.join(" + "))+" · "+esc(duration)+" · "+esc(support);
+ document.getElementById('options').innerHTML=generatedOptions.map((o,i)=>`
+ <div class="option ${i===0?'selected':''}" id="o${i+1}">
+  <div class="opthead"><span class="tag">${o.tag}</span><h3>${o.title}</h3><div class="desc">${o.desc}</div></div>
+  <div class="optbody"><div class="mini">Visual sequence</div><div class="visual">${o.visual}</div>
+  <div class="mini">Sentence frames</div><div class="frames">${o.frames.map(f=>`<span class="frame">${f}</span>`).join("")}</div>
+  <div class="mini">Teacher prompt</div><div class="prompt">${o.prompt}</div></div>
+  <div class="optfoot"><span class="selectedmark">✓ Selected</span><button class="btn secondary" style="margin-left:auto" onclick="selectOpt(${i+1})">Select</button></div>
+ </div>`).join("");
+ selectedOption=1;
+ go(3);
+}
+function selectOpt(n){
+ selectedOption=n;
+ document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));
+ document.getElementById('o'+n).classList.add('selected');
+}
+function selected(){return generatedOptions[selectedOption-1]||generatedOptions[0];}
+
+function prepareRefine(){
+ const o=selected();
+ document.getElementById('selectedTitle').textContent=o.title;
+ document.getElementById('selectedPreview').innerHTML="<b>What this adapts:</b> "+esc(lesson.objective)+"<br><b>Approach:</b> "+esc(o.desc);
+}
+const oldGo=go;
+go=function(n){ if(n===4) prepareRefine(); oldGo(n); };
+
+function generateFinal(){
+ const o=selected();
+ const langs=selectedLanguages();
+ const grade=document.getElementById('grade').value;
+ const duration=document.getElementById('duration').value;
+ const feedback=document.getElementById('feedback').value;
+ document.getElementById('finalTitle').textContent=o.title;
+ document.getElementById('docMeta').textContent="ADAPTED ACTIVITY · "+grade.toUpperCase();
+ document.getElementById('docLangs').textContent=langs.join(" + ");
+ document.getElementById('finalMeta').textContent=o.tag+" · "+duration+" · "+(document.getElementById('support').value);
+ document.getElementById('finalObjective').textContent=document.getElementById('outcome').value.trim()||lesson.objective;
+ const dirs=[
+ "Look at the lesson materials and identify the key idea, relationship, process, or evidence students need to understand.",
+ "Work with your partner/group to represent that idea using the visual routine.",
+ "Take turns explaining your thinking. A student may point, draw, gesture, or use a home language before using the sentence frame.",
+ "Agree on one explanation your group can share."
+ ];
+ document.getElementById('finalDirections').innerHTML=dirs.map((d,i)=>`<div class="bullet"><b>${i+1}.</b> ${d}</div>`).join("");
+ document.getElementById('finalVisual').textContent=o.visual;
+ document.getElementById('finalLanguages').innerHTML=langs.map((l,i)=>{
+   let frame=o.frames[i%o.frames.length];
+   return `<div class="lang"><b>${esc(l)}</b><br>${i===0?esc(frame):i===1?"“Yo puedo explicar…”":"“Show me / Muéstrame…”"}<br><span style="color:#667085">Use pointing, drawing, gestures, or home-language rehearsal as needed.</span></div>`;
+ }).join("");
+ document.getElementById('finalGuide').innerHTML=[
+ `<div class="prompt"><b>Set up:</b> Put students in groups of 3–4. Place the lesson materials/visuals where everyone can reach them.</div>`,
+ `<div class="prompt"><b>Say:</b> “Your job is to help everyone explain, not to give the answer. Everyone gets a turn.”</div>`,
+ `<div class="prompt"><b>Prompt:</b> ${esc(o.prompt)}</div>`,
+ `<div class="prompt"><b>Look for:</b> Students use evidence from the original lesson and every student contributes an idea or representation.</div>`,
+ `<div class="prompt"><b>Teacher feedback incorporated:</b> ${esc(feedback)}</div>`
+ ].join("");
+ document.getElementById('finalMaterials').textContent=lesson.materials;
+ go(5);toast("Final lesson generated from your lesson plan");
+}
+function downloadDoc(){
+ const text=document.getElementById('deliverable').innerText;
+ const blob=new Blob([text],{type:'application/msword'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='LessonBridge-Adapted-Lesson.doc';a.click();toast('Editable lesson downloaded');
+}
+function copyLink(){navigator.clipboard?.writeText(location.href);toast('Prototype link copied');}
+</script>
+</body>
+</html>
